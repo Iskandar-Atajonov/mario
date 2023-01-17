@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario</title>
+    <style>
+
+#game{
+    width: 700px;
+    height: 300px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-image: url("https://img.freepik.com/premium-vector/old-video-game-retro-style-background-vector-illustration_230920-1983.jpg?w=2000");
+    background-size: cover;
+    filter:sepia(1px);
+}
+#dino{
+    width: 60px;
+    height: 70px;
+    background-image: url("https://supermariorun.com/assets/img/hero/hero_chara_mario_update_pc.png");
+    background-size: auto 70px;
+    position: relative;
+    top: 230px;
+}
+#cactus{
+    width: 40px;
+    height: 40px;
+    background-image:url("https://static.wikia.nocookie.net/newersupermariobroswii/images/b/bf/Warp_pipe.png/revision/latest?cb=20181227070915");
+    background-size: auto 40px;
+    top: 190px;
+    left: 650px;
+    position: relative;
+    animation: run 0.9s infinite linear;
+}
+@keyframes run{
+    0%{
+    left: 650px;
+    }
+    50%{
+    left: 350px;    }
+    100%{
+    left: 0px;    
+    }
+}
+.jump{
+    animation: jump 1.2s linear;
+}
+@keyframes jump{
+    0%{
+        top: 230px;
+    }
+    50%{
+        top:150px;
+    }
+    100%{
+        top: 230px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="game">
+        <div id="dino"></div>
+        <div id="cactus"></div>
+    </div>
+    <div id="count">0</div>
+    <script>
+        const dino = document.getElementById("dino");
+const cactus = document.getElementById("cactus");
+
+function jump(){
+    if( dispatchEvent.classList != "jump" ){
+     dino.classList.add("jump");
+     setTimeout(function(){
+        dino.classList.remove("jump")
+     }, 500)
+    }
+}
+
+let checkAlive = setInterval(
+    function(){
+        let dinosaur = parseInt(
+            window.getComputedStyle(dino).getPropertyValue("top") 
+        )
+        let cac = parseInt(
+            window.getComputedStyle(cactus).getPropertyValue("left") 
+        )
+        if( cac > 0 && cac < 70 && dinosaur >= 230 ){
+        dino.style.animationPlayState = "paused";
+        cactus.style.animationPlayState = "paused";
+        alert("You lost !!!!!");
+        window.location.reload();
+        }
+    },20
+)
+document.addEventListener("keydown", function(){
+    jump();
+})
+if( cac > 0 && cac < 70 && dinosaur < 230 && dinosaur >= 150 ){
+ setInterval( kam, 500 )
+ const count = 0;
+ function kam() {
+      count += 1;
+      document.getElementById("count").innerHTML = count;
+ }
+}
+else{
+      count = 0;
+      document.getElementById("count").innerHTML = count;      
+}
+    </script>
+</body>
+</html>
